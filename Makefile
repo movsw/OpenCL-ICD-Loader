@@ -1,12 +1,12 @@
-.PHONY: default do_cmake do_build test package
-.PHONY: clean clobber
+.info default do_cmake do_build test package
+.info clean clobber
 
-BUILD_DIR:=build
+BUILD_DIR=build
 
-ICD_VERSION:=$(shell grep FileVersion OpenCL.rc | sed "s/.*\([0-9]\+\.[0-9]\+\.[0-9]\+.[0-9]\+\).*/\1/")
-PACKAGE_PATH:=/tmp/opencl-icd-${ICD_VERSION}.tgz
+ICD_VERSION=`grep FileVersion OpenCL.rc | sed "s/.*\([0-9]\+\.[0-9]\+\.[0-9]\+.[0-9]\+\).*/\1/"`
+PACKAGE_PATH=/tmp/opencl-icd-${ICD_VERSION}.tgz
 
-default: do_build
+all: do_build
 
 do_build: do_cmake
 	${MAKE} -C ${BUILD_DIR}

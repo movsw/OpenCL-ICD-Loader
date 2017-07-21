@@ -9,6 +9,9 @@ set (OPENCL_ICD_LOADER_SOURCES icd.c icd_dispatch.c)
 
 if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
     list (APPEND OPENCL_ICD_LOADER_SOURCES icd_linux.c icd_exports.map)
+elseif ("${CMAKE_SYSTEM_NAME}" STREQUAL "FreeBSD")
+    list (APPEND OPENCL_ICD_LOADER_SOURCES icd_linux.c icd_exports.map)
+    include_directories (/usr/local/include)
 else ()
     list (APPEND OPENCL_ICD_LOADER_SOURCES icd_windows.c OpenCL.def)
     include_directories ($ENV{DXSDK_DIR}/Include)
@@ -25,7 +28,7 @@ include_directories (${OPENCL_INCLUDE_DIRS})
 add_library (OpenCL SHARED ${OPENCL_ICD_LOADER_SOURCES})
 set_target_properties (OpenCL PROPERTIES VERSION "1.2" SOVERSION "1")
 
-if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux")
+if ("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux" OR "${CMAKE_SYSTEM_NAME}" STREQUAL "FreeBSD")
     set_target_properties (OpenCL PROPERTIES LINK_FLAGS "-pthread -Wl,--version-script -Wl,${CMAKE_CURRENT_SOURCE_DIR}/icd_exports.map")
 endif ()
 

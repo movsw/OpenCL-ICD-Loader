@@ -53,6 +53,10 @@
 #include <CL/cl.h>
 #include <CL/cl_ext.h>
 
+#ifndef CL_API_SUFFIX__VERSION_2_2
+#define CL_API_SUFFIX__VERSION_2_2
+#endif
+
 /*
  * type definitions
  */

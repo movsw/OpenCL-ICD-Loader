@@ -57,6 +57,10 @@
 // cl.h
 #include <CL/cl.h>
 
+#ifndef CL_API_SUFFIX__VERSION_2_2
+#define CL_API_SUFFIX__VERSION_2_2
+#endif
+
 // cl_gl.h and required files
 #ifdef _WIN32
 #include <windows.h>
